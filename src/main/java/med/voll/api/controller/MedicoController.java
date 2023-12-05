@@ -9,6 +9,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+
 @RestController
 @RequestMapping("medicos")
 public class MedicoController {
@@ -32,5 +34,11 @@ public class MedicoController {
     public void atualizar(@RequestBody @Valid DadosAtualizacaoMedicos dados){
         var medico = repository.getReferenceById(dados.id());
         medico.atualizarinformacoes(dados);
+    }
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+        repository.deleteById(id);
+
     }
 }
